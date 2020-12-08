@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, TouchableOpacity, Text, TextInput, StyleSheet, Alert, Modal} from 'react-native';
+import {View, TouchableOpacity, Text, TextInput, StyleSheet, Alert, Modal, KeyboardAvoidingView,ScrollView} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
 
@@ -163,6 +163,11 @@ export default class LoginSignupScreen extends React.Component{
     render(){
         return(
             <View style={{backgroundColor:'#F8BE85'}}>
+                <View style={{justifyContent:'center',alignItems:'center'}}>
+                    {
+                        this.showModal()
+                    }
+                </View>
                 <View style={{marginLeft:100}}>
                     <Text style={styles.title}>Barter</Text>
                 </View>

@@ -23,7 +23,7 @@ export default class LoginSignupScreen extends React.Component{
             return Alert.alert("Passwords don't match")
         } else{
             firebase.auth().createUserWithEmailAndPassword(email,password)
-            .then((response)=>{
+            .then(()=>{
                 db.collection('Users').add(
                     {
                         "firstName":this.state.firstName,
@@ -43,8 +43,8 @@ export default class LoginSignupScreen extends React.Component{
     }
 
     userLogin=(email,password)=>{
-        firebase.auth().createUserWithEmailAndPassword(email,password)
-        .then((response)=>{return Alert.alert("User Successfully Logged In")})
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then((response)=>{this.props.navigation.navigate("ExchangeScreen")})
         .catch(function(error){
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -198,6 +198,7 @@ export default class LoginSignupScreen extends React.Component{
                         style={[styles.button,{marginTop:20,marginBottom:20}]} 
                         onPress={()=>{
                             this.userLogin(this.state.email,this.state.password);
+
                         }}
                     >
                         <Text style={styles.buttonText}>

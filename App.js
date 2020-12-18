@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Image } from 'react-native';
 import LoginSignupScreen from './screens/LoginSignupScreen';
+import {createAppContainer,} from 'react-navigation'
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {StackNavigator} from './components/StackNavigator';
+import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
@@ -10,6 +14,21 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  
-});
+const TabNavigator = createBottomTabNavigator({
+  ExchangeScreen:{
+    screen:StackNavigator,
+    navigationOptions:{
+      tabBarIcon:<Image source ={require('./assets/exchange.jpg')} style={{width:20,height:20}}/>,
+      tabBarLabel:'Exchange'
+    }
+  },
+  HomeScreen:{
+    screen:HomeScreen,
+    navigationOptions:{
+      tabBarIcon:<Image source={require('./assets/home.png')} style={{width:20,height:20}}/>,
+      tabBarLabel:'HomeScreen'
+    }
+  }
+})
+
+const AppContainer = createAppContainer(TabNavigator);

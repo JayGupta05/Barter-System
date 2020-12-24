@@ -1,34 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View,Image } from 'react-native';
 import LoginSignupScreen from './screens/LoginSignupScreen';
-import {createAppContainer,} from 'react-navigation'
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {StackNavigator} from './components/StackNavigator';
-import HomeScreen from './screens/HomeScreen';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation'
+import { TabNavigator } from './components/TabNavigator';
 
-export default function App() {
-  return (
-    <View>
-      <LoginSignupScreen/>
-    </View>
-  );
+export default class App extends React.Component{
+  render(){
+    return (
+      <View>
+        <AppContainer/>
+      </View>
+    );
+  }
 }
 
-const TabNavigator = createBottomTabNavigator({
-  ExchangeScreen:{
-    screen:StackNavigator,
-    navigationOptions:{
-      tabBarIcon:<Image source ={require('./assets/exchange.jpg')} style={{width:20,height:20}}/>,
-      tabBarLabel:'Exchange'
-    }
+const SwitchNavigator = createSwitchNavigator({
+  LoginSignupScreen:{
+    screen:LoginSignupScreen,
   },
-  HomeScreen:{
-    screen:HomeScreen,
-    navigationOptions:{
-      tabBarIcon:<Image source={require('./assets/home.png')} style={{width:20,height:20}}/>,
-      tabBarLabel:'HomeScreen'
-    }
+  BottomTab:{
+    screen:TabNavigator,
   }
-})
+}) 
 
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(SwitchNavigator);

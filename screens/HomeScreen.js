@@ -1,4 +1,4 @@
-import * as React from 'react-native';
+import * as React from 'react';
 import {View, Text, TouchableOpacity,StyleSheet, FlatList, Alert } from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
@@ -11,6 +11,10 @@ export default class HomeScreen extends React.Component{
             allExchanges:[],
         }
         this.exchangeRef=null;
+    }
+
+    componentDidMount=()=>{
+        this.getAllExchanges();
     }
 
     getAllExchanges=()=>{

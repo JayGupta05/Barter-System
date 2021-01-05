@@ -31,7 +31,7 @@ export default class ExchangeScreen extends React.Component{
         return(
             <View>
                 <TextInput
-                    style={styles.formTextInput}
+                    style={[styles.formTextInput,{marginTop:200}]}
                     placeholder="Item Name"
                     onChangeText={(text)=>{
                         this.setState({
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.44,
         shadowRadius: 10.32,
         elevation: 16,
-        marginTop:20
+        marginTop:50,
+        marginLeft:50,
         },
 })

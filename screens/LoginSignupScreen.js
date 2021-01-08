@@ -22,7 +22,7 @@ export default class LoginSignupScreen extends React.Component{
         if(password!=confirmPassword){
             return Alert.alert("Passwords don't match")
         } else{
-            firebase.auth().createUserWithEmailAndPassword(email,password)
+            firebase.auth().createUserWithEmailAndPassword(email.toLowerCase(),password.toLowerCase())
             .then(()=>{
                 db.collection('Users').add(
                     {
@@ -30,7 +30,7 @@ export default class LoginSignupScreen extends React.Component{
                         "lastName":this.state.lastName,
                         "address":this.state.address,
                         "phoneNumber":this.state.phoneNumber,
-                        "email":this.state.email,
+                        "email":this.state.email.toLowerCase(),
                     }
                 )
                 return Alert.alert("User Added")})

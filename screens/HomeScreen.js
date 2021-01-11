@@ -45,6 +45,9 @@ export default class HomeScreen extends React.Component{
                 rightElement={
                     <TouchableOpacity
                         style={styles.button}
+                        onPress={()=>{
+                            this.props.navigation.navigate("receiverScreen",{"Details":item})
+                        }}
                     >
                         <Text style={{color:"#ffffff"}}>
                             View

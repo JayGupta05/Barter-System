@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {View, Text, TouchableOpacity,StyleSheet} from 'react-native';
+import {Card, Header, Icon} from 'react-native-elements';
+import db from '../config';
+import firebase from 'firebase';
 
 export default class Receiver extends React.Component{
     constructor(props){

@@ -37,7 +37,7 @@ export default class Receiver extends React.Component{
     updateExchangeStatus=()=>{
         db.collection("allExchanges").add({
             "bookName":this.state.itemName,
-            "requestId":this.state.requestId,
+            "exchangeId":this.state.requestId,
             "exchangedBy":this.state.receiverName,
             "donorId":this.state.userId,
             "requestStatus":"Donor Interested",

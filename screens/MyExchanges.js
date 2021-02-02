@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, Text, TouchableOpacity,StyleSheet,FlatList} from 'react-native';
 import { Icon, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
+import db from '../config';
 
 export default class MyExchanges extends React.Component{
     constructor(){
@@ -12,14 +13,19 @@ export default class MyExchanges extends React.Component{
         }
     }
 
+    componentDidMount=()=>{
+        this.getAllExchanges();
+    }
+
     getAllExchanges=()=>{
-        db.collection("allDonations").where("donorId","==",this.state.userId).onSnapshot((snapshot)=>{
+        db.collection("allExchanges").where("donorId","==",this.state.userId).onSnapshot((snapshot)=>{
             var allBarters = snapshot.docs.map(document=>{
-                document.data();
+                return document.data();
             })
             this.setState({
                 allBarters:allBarters
             })
+            console.log(this.state.allBarters + "" + "Test")
         })
     }
 
@@ -27,10 +33,10 @@ export default class MyExchanges extends React.Component{
         index.toString();
     }
 
-    renderItems=({item,i})=>{
+    renderItems=({item,i})=>(
         <ListItem
             key={i}
-            title={item.bookName}
+            title={item.itemName}
             subtitle={"Request By" + item.exchangedBy + "Status" + item.requestStatus}
             leftElement={
                 <Icon 
@@ -47,7 +53,7 @@ export default class MyExchanges extends React.Component{
                 }
                 bottomDivider
         />
-    }
+    )
 
     render(){
         return(
@@ -63,7 +69,7 @@ export default class MyExchanges extends React.Component{
                         <FlatList
                             keyExtractor={this.keyExtractor}
                             data={this.state.allBarters}
-                            renderItem={this.renderItem}
+                            renderItem={this.renderItems}
                         />
                     )
                 }

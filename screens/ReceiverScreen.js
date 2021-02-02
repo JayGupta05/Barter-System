@@ -10,13 +10,17 @@ export default class Receiver extends React.Component{
         this.state={
             userId:firebase.auth().currentUser.email,
             receiverId:this.props.navigation.getParam("Details")["userName"],
-            requestId:this.props.navigation.getParam("Details")["requestId"],
+            requestId:this.props.navigation.getParam("Details")["exchangeId"],
             itemName:this.props.navigation.getParam("Details")["itemName"],
             reason:this.props.navigation.getParam("Details")["description"],
             receiverName:"",
             receiverContact:"",
             receiverAddress:"",
         }
+    }
+
+    componentDidMount=()=>{
+        this.getUserDetails();
     }
 
     getUserDetails=()=>{
@@ -36,7 +40,7 @@ export default class Receiver extends React.Component{
 
     updateExchangeStatus=()=>{
         db.collection("allExchanges").add({
-            "bookName":this.state.itemName,
+            "itemName":this.state.itemName,
             "exchangeId":this.state.requestId,
             "exchangedBy":this.state.receiverName,
             "donorId":this.state.userId,

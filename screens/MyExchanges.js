@@ -10,6 +10,7 @@ export default class MyExchanges extends React.Component{
         this.state={
             userId:firebase.auth().currentUser.email,
             allBarters:[],
+            userName:'',
         }
     }
 
@@ -47,13 +48,61 @@ export default class MyExchanges extends React.Component{
             }
             titleStyle={{ color: 'black', fontWeight: 'bold' }}
             rightElement={
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                    style={[
+                        styles.button,
+                        {
+                            backgroundColor : item.requestStatus === "Book Sent" ? "green" : "#ff5722"
+                        }
+                        ]}
+                        onPress={()=>{
+                            this.sendItem(item);
+                        }}
+                        >
                     <Text style={{color:'#ffff'}}>Send Item</Text>
                 </TouchableOpacity>
                 }
                 bottomDivider
         />
     )
+
+    sendItem=(itemDetails)=>{
+        if(itemDetails.requestStatus==="Item Sent"){
+            var status = "Donor Interested";
+            db.collection("allExchanges").doc(itemDetails.doc_id).update({
+                requestStatus:"Donor Interested"
+            })
+            this.sendNotification(itemkDetails,status);
+        } else{
+            var request = "Item Sent";
+            db.collection("allExchanges").doc(itemDetails.doc_id).update({
+                requestStatus:"Item Sent"
+            })
+            this.sendNotification(itemDetails,request);
+        }
+    }
+
+    sendNotification=(itemDetails,requestStatus)=>{
+        var requestId = itemDetails.requestId;
+        var donorId = itemDetails.donorId;
+        db.collection("allNotifications").where("requestId","==",requestId).where("donorId","==",donorId).get()
+        .then((snapshot)=>{
+                snapshot.forEach((doc) =>{
+                    var message = ""
+                    if(requestStatus==="Book Sent"){
+                        message=this.state.userName + " sent you the book."
+                    } else{
+                        message=this.state.userName + "has shown interest in your book."
+                    }
+                    db.collection("allNotifications").doc(doc.id).update({
+                        message:message,
+                        notificationStatus:"unread",
+                        date:firebase.firestore.FieldValue.serverTimestamp(),
+                    })
+                })
+            }
+        )
+    }
 
     render(){
         return(

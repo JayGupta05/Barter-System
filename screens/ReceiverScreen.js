@@ -38,6 +38,19 @@ export default class Receiver extends React.Component{
         )
     }
 
+    addNotification=()=>{
+        var message = this.state.receiverName + " has shown interest in donating the book.";
+        db.collection("allNotifications").add({
+            "targetedUserId":this.state.receiverId,
+            "donorId":this.state.userId,
+            "requestId":this.state.requestId,
+            "itemName":this.state.itemName,
+            "date":firebase.firestore.FieldValue.serverTimestamp(),
+            "notificationStatus":"Unread",
+            "message":message
+        })
+    }
+
     updateExchangeStatus=()=>{
         db.collection("allExchanges").add({
             "itemName":this.state.itemName,
@@ -106,15 +119,16 @@ export default class Receiver extends React.Component{
                     this.state.receiverId!=this.state.userId
                     ? (
                         <TouchableOpacity 
-                    style={styles.button}
-                    onPress={()=>{
-                        this.updateExchangeStatus();
-                    }}
-                >
-                    <Text>
-                        Donate
-                    </Text>
-                </TouchableOpacity>
+                            style={styles.button}
+                            onPress={()=>{
+                                this.updateExchangeStatus();
+                                this.addNotification();
+                            }}
+                        >
+                            <Text>
+                                Exchange
+                            </Text>
+                        </TouchableOpacity>
                     )
                     : null                        
                 }

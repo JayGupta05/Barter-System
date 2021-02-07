@@ -21,10 +21,11 @@ export default class Receiver extends React.Component{
 
     componentDidMount=()=>{
         this.getUserDetails();
+        this.addNotification();
     }
 
     getUserDetails=()=>{
-        db.collection("Users").where("email","==",this.state.receiverId).get()
+        db.collection("Users").where("email","==",this.state.userId).get()
         .then(
             snapshot=>{
                 snapshot.forEach(doc=>{

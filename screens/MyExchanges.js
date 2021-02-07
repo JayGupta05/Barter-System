@@ -83,7 +83,7 @@ export default class MyExchanges extends React.Component{
     }
 
     sendNotification=(itemDetails,requestStatus)=>{
-        var requestId = itemDetails.requestId;
+        var requestId = itemDetails.exchangeId;
         var donorId = itemDetails.donorId;
         db.collection("allNotifications").where("requestId","==",requestId).where("donorId","==",donorId).get()
         .then((snapshot)=>{

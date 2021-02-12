@@ -47,7 +47,7 @@ export default class Receiver extends React.Component{
             "requestId":this.state.requestId,
             "itemName":this.state.itemName,
             "date":firebase.firestore.FieldValue.serverTimestamp(),
-            "notificationStatus":"Unread",
+            "notificationStatus":"unread",
             "message":message
         })
     }

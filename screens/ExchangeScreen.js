@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View, Text, TextInput,StyleSheet, KeyboardAvoidingView, TouchableOpacity,Alert} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
+import MyHeader from '../components/MyHeader';
 
 export default class ExchangeScreen extends React.Component{
     constructor(){
@@ -35,37 +36,40 @@ export default class ExchangeScreen extends React.Component{
 
     render(){
         return(
-            <View>
-                <TextInput
-                    style={[styles.formTextInput,{marginTop:200}]}
-                    placeholder="Item Name"
-                    onChangeText={(text)=>{
-                        this.setState({
-                            itemName:text
-                        })
-                    }}
-                    value={this.state.itemName}
-                />
-                <TextInput
-                    style={styles.formTextInput}
-                    placeholder="Description"
-                    onChangeText={(text)=>{
-                        this.setState({
-                            description:text
-                        })
-                    }}
-                    value={this.state.description}
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={()=>{
-                        this.addItem(this.state.itemName,this.state.description);
-                    }}
-                >
-                    <Text>
-                        Exchange
-                    </Text>
-                </TouchableOpacity>
+           <View style={{flex:1}}>
+                <MyHeader title='Exchange Items'/>
+                <View>
+                    <TextInput
+                        style={[styles.formTextInput,{marginTop:200}]}
+                        placeholder="Item Name"
+                        onChangeText={(text)=>{
+                            this.setState({
+                                itemName:text
+                            })
+                        }}
+                        value={this.state.itemName}
+                    />
+                    <TextInput
+                        style={styles.formTextInput}
+                        placeholder="Description"
+                        onChangeText={(text)=>{
+                            this.setState({
+                                description:text
+                            })
+                        }}
+                        value={this.state.description}
+                    />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={()=>{
+                            this.addItem(this.state.itemName,this.state.description);
+                        }}
+                    >
+                        <Text>
+                            Exchange
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }

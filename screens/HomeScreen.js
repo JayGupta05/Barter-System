@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity,StyleSheet, FlatList, Alert } from 'react-n
 import db from '../config';
 import firebase from 'firebase';
 import { ListItem } from 'react-native-elements';
+import MyHeader from '../components/MyHeader';
 
 export default class HomeScreen extends React.Component{
     constructor(){
@@ -62,6 +63,7 @@ export default class HomeScreen extends React.Component{
     render(){
         return(
             <View style={{flex:1}}>
+                <MyHeader title='Donate Items'/>
                 <View style={{flex:1}}>
                     {   this.state.allExchanges===[]
                         ? 

@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity,StyleSheet,FlatList} from 'react-native';
 import { Icon, ListItem} from 'react-native-elements';
 import firebase from 'firebase';
 import db from '../config';
+import MyHeader from '../components/MyHeader';
 
 export default class MyExchanges extends React.Component{
     constructor(){
@@ -107,21 +108,24 @@ export default class MyExchanges extends React.Component{
     render(){
         return(
             <View style={{flex:1}}>
-                {
-                    this.state.allBarters.length === 0
-                    ?(
-                        <View style={styles.subtitle}>
-                            <Text style={{ fontSize: 20}}>List of all Item Barters</Text>
-                        </View>
-                    )
-                    :(
-                        <FlatList
-                            keyExtractor={this.keyExtractor}
-                            data={this.state.allBarters}
-                            renderItem={this.renderItems}
-                        />
-                    )
-                }
+                <MyHeader navigation={this.props.navigation} title="My Exchanges"/>
+                <View style={{flex:1}}>
+                    {
+                        this.state.allBarters.length === 0
+                        ?(
+                            <View style={styles.subtitle}>
+                                <Text style={{ fontSize: 20}}>List of all Item Barters</Text>
+                            </View>
+                        )
+                        :(
+                            <FlatList
+                                keyExtractor={this.keyExtractor}
+                                data={this.state.allBarters}
+                                renderItem={this.renderItems}
+                            />
+                        )
+                    }
+                </View>
             </View>
         );
     }

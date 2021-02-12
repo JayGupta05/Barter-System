@@ -3,6 +3,7 @@ import { StyleSheet, View, FlatList,Text } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import db from '../config';
+import MyHeader from '../components/MyHeader';
 
 export default class NotificationScreen extends Component{
     constructor(props) {
@@ -23,7 +24,7 @@ export default class NotificationScreen extends Component{
             var notification = doc.data()
             notification["doc_id"] = doc.id
             allNotifications.push(notification)
-        });
+        })
         this.setState({
             allNotifications : allNotifications
         });
@@ -53,6 +54,7 @@ export default class NotificationScreen extends Component{
     render(){
         return(
         <View style={styles.container}>
+            <MyHeader title={"Notifications"} navigation={this.props.navigation}/>
             <View style={{flex:0.9}}>
             {
                 this.state.allNotifications.length === 0

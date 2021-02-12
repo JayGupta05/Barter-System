@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View,Text,TouchableOpacity,StyleSheet, TextInput,Alert} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
+import MyHeader from '../components/MyHeader';
 
 export default class SettingsScreen extends React.Component{
     constructor(){
@@ -50,63 +51,67 @@ export default class SettingsScreen extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-             <View style={styles.formContainer}>
-                 <TextInput
-                    style={styles.formTextInput}
-                    placeholder="First Name"
-                    maxLength={8}
-                    onChangeText={(text)=>{
-                        this.setState({
-                            firstName:text,
-                        })
-                    }}
-                    value={this.state.firstName}
-                 />
-                 <TextInput
-                    style={styles.formTextInput}
-                    placeholder="Last Name"
-                    maxLength={8}
-                    onChangeText={(text)=>{
-                        this.setState({
-                            lastName:text,
-                        })
-                    }}
-                    value={this.state.lastName}
-                 />
-                 <TextInput
-                    style={styles.formTextInput}
-                    placeholder="Phone Number"
-                    maxLength={10}
-                    keyboardType="numeric"
-                    onChangeText={(text)=>{
-                        this.setState({
-                            phoneNumber:text,
-                        })
-                    }}
-                    value={this.state.contact}
-                 />
-                 <TextInput
-                    style={styles.formTextInput}
-                    placeholder="Address"
-                    multiline={true}
-                    onChangeText={(text)=>{
-                        this.setState({
-                            address:text,
-                        })
-                    }}
-                    value={this.state.address}
-                 />
-                <TouchableOpacity 
-                    style={styles.button}
-                    onPress={()=>{
-                        this.updateData();
-                    }}
-                >
-                    <Text style={styles.buttonText}>
-                        Save
-                    </Text>
-                 </TouchableOpacity>
-             </View>
+                <MyHeader
+                    title = "Settings"
+                    navigation = {this.props.navigation}
+                />
+                <View style={styles.formContainer}>
+                    <TextInput
+                        style={styles.formTextInput}
+                        placeholder="First Name"
+                        maxLength={8}
+                        onChangeText={(text)=>{
+                            this.setState({
+                                firstName:text,
+                            })
+                        }}
+                        value={this.state.firstName}
+                    />
+                    <TextInput
+                        style={styles.formTextInput}
+                        placeholder="Last Name"
+                        maxLength={8}
+                        onChangeText={(text)=>{
+                            this.setState({
+                                lastName:text,
+                            })
+                        }}
+                        value={this.state.lastName}
+                    />
+                    <TextInput
+                        style={styles.formTextInput}
+                        placeholder="Phone Number"
+                        maxLength={10}
+                        keyboardType="numeric"
+                        onChangeText={(text)=>{
+                            this.setState({
+                                phoneNumber:text,
+                            })
+                        }}
+                        value={this.state.contact}
+                    />
+                    <TextInput
+                        style={styles.formTextInput}
+                        placeholder="Address"
+                        multiline={true}
+                        onChangeText={(text)=>{
+                            this.setState({
+                                address:text,
+                            })
+                        }}
+                        value={this.state.address}
+                    />
+                    <TouchableOpacity 
+                        style={styles.button}
+                        onPress={()=>{
+                            this.updateData();
+                        }}
+                    >
+                        <Text style={styles.buttonText}>
+                            Save
+                        </Text>
+                    </TouchableOpacity>
+                </View>
          </View>
         );
     }
